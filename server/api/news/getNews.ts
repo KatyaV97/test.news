@@ -14,7 +14,7 @@ export default defineEventHandler(async (event: H3Event<Request>) => {
     const parser = new Parser();
 
     try {
-        return await parser.parseURL('http://static.feed.rbc.ru/rbc/logical/footer/news.rss')
+        return await parser.parseURL(NEWS)
     } catch (exception) {
         return {
             error: true,

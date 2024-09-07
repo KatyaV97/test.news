@@ -11,7 +11,7 @@
       </NuxtLink>
       <div class="d-flex align-center date-block">
         <p class="_non-space">
-          {{ getFormattedDate() }}
+          {{ getShortFormattedDate(news.pubDate) }}
         </p>
       </div>
     </div>
@@ -23,16 +23,12 @@
 </template>
 
 <script setup lang="ts">
-import {defineProps} from 'vue'
-import moment from 'moment'
+import {defineProps} from "vue"
+import {getShortFormattedDate} from "~/composables/useFormatedDate";
 
-const props = defineProps({
+defineProps({
   news: Object,
 })
-
-function getFormattedDate() {
-  return moment(props.news.pubDate).locale('ru').format("D.MM")
-}
 </script>
 
 <style scoped>
