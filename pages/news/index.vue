@@ -15,11 +15,11 @@
         Список новостей
       </h1>
       <template
-          v-if="news.value?.items
-                && news.value.items.length > 0"
+          v-if="newsStore.newsList?.items
+                && newsStore.newsList.items.length > 0"
       >
         <NewsBlock
-            v-for="news in news.value.items"
+            v-for="news in newsStore.newsList.items"
             :news="news"
         />
       </template>
@@ -28,14 +28,15 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {useNewsStore} from "~/store/news";
 
-const pageTitle = 'Список новостей';
-let news = ref({})
-const { data, pending, error } = await useFetch('/api/news/getNews');
-news.value = data;
-console.log(news)
+const newsStore = useNewsStore();
+const pageTitle = 'Новости';
 
+await newsStore.getNews()
+
+
+console.log(newsStore.newsList.items)
 </script>
 
 <style scoped>
