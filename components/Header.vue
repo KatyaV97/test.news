@@ -10,7 +10,7 @@
           class="center"
       >
         <NuxtLink
-            to="#"
+            to="/news"
         >
           <li
               :class="{
@@ -27,22 +27,16 @@
   </header>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import {PerfectScrollbar} from 'vue3-perfect-scrollbar'
 import 'vue3-perfect-scrollbar/style.css'
 
-export default {
-  name: "Header",
-  components: {
-    PerfectScrollbar
-  },
-  props: {
-    activeTab: {
-      type: Number,
-      default: 99
-    }
-  }
+export interface Props {
+  activeTab: number
 }
+withDefaults(defineProps<Props>(), {
+  activeTab: -1,
+});
 </script>
 
 <style scoped>

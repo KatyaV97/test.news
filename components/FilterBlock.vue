@@ -38,27 +38,29 @@
 
 <script lang="ts" setup>
 import {VDateInput} from "vuetify/labs/VDateInput"
+import type {Ref} from "@vue/reactivity"
 import {ref} from 'vue';
-import {useNewsStore} from "~/store/news";
+import {useNewsStore} from "@/store/news";
 import moment from "moment/moment";
-import {useUrlParams} from "~/composables/useQueryParams"
+import {useUrlParams} from "@/composables/useQueryParams"
+import type {DateRange} from "@/types/news";
 
-let searchValue = ref('')
-let searchDate = ref(null)
+let searchValue: Ref<string> = ref('')
+let searchDate: Ref<DateRange[] | null> = ref(null)
 const newsStore = useNewsStore();
 const {setQueryParameter, deleteQueryParameter, deleteQueryParameters} = useUrlParams()
 initParameters()
 
-function initParameters() {
+function initParameters(): void {
   if (newsStore.parameters.search !== '') {
     searchValue.value = newsStore.parameters.search
   }
   if (newsStore.parameters.date) {
-    searchDate.value = newsStore.parameters.date
+    searchDate.value = [newsStore.parameters.date]
   }
 }
 
-function clearFilter() {
+function clearFilter(): void {
   searchValue.value = ''
   newsStore.parameters.search = ''
   newsStore.parameters.date = null
@@ -67,7 +69,7 @@ function clearFilter() {
   newsStore.initNewsByParams()
 }
 
-function onHandleSearchByValue() {
+function onHandleSearchByValue(): void {
   if (searchValue.value === '') {
     newsStore.parameters.search = ''
     deleteQueryParameter('search')
@@ -78,7 +80,7 @@ function onHandleSearchByValue() {
   newsStore.initNewsByParams()
 }
 
-function onHandleSearchByDate() {
+function onHandleSearchByDate(): void {
   if (searchDate.value.length === 1) {
     newsStore.parameters.date = {
       from: moment(searchDate.value[0]).format('DD.MM.YYYY'),
@@ -95,8 +97,7 @@ function onHandleSearchByDate() {
     setQueryParameter('dateTo', newsStore.parameters.date.to)
   } else {
     newsStore.parameters.date = null
-    deleteQueryParameter('dateFrom')
-    deleteQueryParameter('dateTo')
+    deleteQueryParameters(['dateFrom', 'dateTo'])
   }
   newsStore.initNewsByParams()
 }

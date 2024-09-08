@@ -58,9 +58,9 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from "vue"
-import {useNewsStore} from "~/store/news";
-import {initParams} from "~/composables/useFilter"
+import {computed} from 'vue';
+import {useNewsStore} from "@/store/news";
+import {initParams} from "@/composables/useFilter";
 
 const newsStore = useNewsStore();
 const pageTitle = 'Новости';
@@ -72,10 +72,17 @@ if (!newsStore.newsList?.items
     || newsStore.newsList.items.length === 0) {
   await newsStore.getNews();
 }
-newsStore.initNewsByParams();
+console.log(newsStore.newsList)
+newsStore.initNewsByParams()
 
 const filteredNews = computed(() => {
-  return newsStore.newsList.items.slice((newsStore.parameters.page - 1) * newsStore.pagination.newsCount, newsStore.pagination.newsCount * newsStore.parameters.page)
+  if (!newsStore.newsList?.items
+      || !Array.isArray(newsStore.newsList.items)) {
+    return [];
+  }
+  const startIndex = (newsStore.parameters.page - 1) * newsStore.pagination.newsCount;
+  const endIndex = newsStore.pagination.newsCount * newsStore.parameters.page;
+  return newsStore.newsList.items.slice(startIndex, endIndex);
 })
 
 function closeAlert() {

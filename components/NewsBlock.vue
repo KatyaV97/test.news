@@ -24,11 +24,12 @@
 
 <script setup lang="ts">
 import {defineProps} from "vue"
-import {getShortFormattedDate} from "~/composables/useFormatedDate";
+import {getShortFormattedDate} from "@/composables/useFormatedDate";
+import type {NewsItem} from "@/types/news";
 
-defineProps({
-  news: Object,
-})
+defineProps<{
+  news: NewsItem;
+}>();
 </script>
 
 <style scoped>

@@ -85,10 +85,10 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue"
+import {ref, watch} from "vue"
 import {useRoute} from "vue-router"
-import {useNewsStore} from "~/store/news";
-import {getFullFormattedDate} from "~/composables/useFormatedDate";
+import {useNewsStore} from "@/store/news";
+import {getFullFormattedDate} from "@/composables/useFormatedDate";
 
 const pageTitle = 'Новости';
 const route = useRoute()
@@ -99,19 +99,19 @@ if (!newsStore.newsList?.items
     || newsStore.newsList.items.length === 0) {
   await newsStore.getNews();
 } else {
-  newsStore.setNewsById(route.params.id);
+  newsStore.setNewsById(route.params.id.toString());
 }
 
 watch(
     () => [newsStore.newsList],
     ([newsData]) => {
       if (newsData && route.params.id) {
-        newsStore.setNewsById(route.params.id);
+        newsStore.setNewsById(route.params.id.toString());
       }
     }
 );
 
-function toggleOverlay() {
+function toggleOverlay(): void {
   overlay.value = !overlay.value;
 }
 </script>

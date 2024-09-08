@@ -19,6 +19,7 @@ export function useUrlParams() {
         delete params[name]
         router.push({query: params})
     }
+
     function deleteQueryParameters(names: string[]): void {
         const params = qs.parse(route.query)
         names.forEach(name => {

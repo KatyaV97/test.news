@@ -6,9 +6,8 @@ import {
 } from "~/server/helpers/errorHelpers"
 
 /**
- * /companies
- * Method: GET
- * Получение списка компаний
+ * /rbc/logical/footer/news.rss
+ * Получение списка новостей
  */
 export default defineEventHandler(async (event: H3Event<Request>) => {
     const parser = new Parser();
