@@ -40,7 +40,7 @@ export const useNewsStore = defineStore('newsStore', {
             this.pagination.pageCount = Math.ceil(count / this.pagination.newsCount)
         },
         initNewsByParams(): void {
-            if (!this.newsList?.items) {
+            if (!this.allNewsList?.items) {
                 this.newsList.items = [];
                 return
             }

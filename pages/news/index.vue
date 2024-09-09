@@ -58,22 +58,30 @@
 </template>
 
 <script setup lang="ts">
-import {computed} from 'vue';
+import {computed, watch, ref} from 'vue';
 import {useNewsStore} from "@/store/news";
 import {initParams} from "@/composables/useFilter";
 
 const newsStore = useNewsStore();
 const pageTitle = 'Новости';
 const skeletonsCount = 3;
+const allNewsList = ref(null);
 
-initParams()
+(async () => {
+  initParams()
+  if (!newsStore.newsList?.items
+      || newsStore.newsList.items.length === 0) {
+    await newsStore.getNews()
+  }
+  allNewsList.value = newsStore.allNewsList
+})();
 
-if (!newsStore.newsList?.items
-    || newsStore.newsList.items.length === 0) {
-  await newsStore.getNews();
-}
-console.log(newsStore.newsList)
-newsStore.initNewsByParams()
+watch(allNewsList, (newVal) => {
+      if (newVal?.items) {
+        newsStore.initNewsByParams()
+      }
+    }, {deep: true}
+)
 
 const filteredNews = computed(() => {
   if (!newsStore.newsList?.items
