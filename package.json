@@ -29,5 +29,38 @@
   "devDependencies": {
     "vite-plugin-vuetify": "^2.0.4",
     "vuetify": "^3.7.1"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/vue3-essential",
+      "eslint:recommended",
+      "@vue/typescript",
+      "@vue/typescript/recommended"
+    ],
+    "parserOptions": {
+      "parser": "@typescript-eslint/parser",
+      "ecmaVersion": 2020
+    },
+    "rules": {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "vue/no-mutating-props": "off",
+      "@typescript-eslint/no-this-alias": "off",
+      "@typescript-eslint/no-empty-function": "off"
+    },
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/*.{j,t}s?(x)",
+          "**/tests/unit/**/*.spec.{j,t}s?(x)"
+        ],
+        "env": {
+          "jest": true
+        }
+      }
+    ]
   }
 }
