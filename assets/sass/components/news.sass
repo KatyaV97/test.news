@@ -1,0 +1,59 @@
+.breadcrumb-container
+  cursor: pointer
+  height: 24px
+
+  p
+    @include default-text
+    color: $base-blue
+
+.news-content-block
+  .page-title
+    @include default-h1
+    color: $text-major
+    margin-bottom: 20px
+
+  .news-item
+    background-color: $background-white
+    border-radius: 16px
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)
+
+    &:hover
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2)
+
+    .news-title
+      @include default-h3
+      @include regular-text
+      color: $text-major
+
+    .news-description
+      @include default-text
+      color: $text-minor
+
+    .date-block
+      @include default-text
+      color: $text-help
+      background: $background-grey
+      padding: 4px 12px
+      border-radius: 12px
+      height: fit-content
+
+    .news-description
+      -webkit-box-orient: vertical
+      -webkit-line-clamp: 2
+      align-self: stretch
+      overflow: hidden
+      text-overflow: ellipsis
+
+.popup-block
+  width: 100%
+  overflow: hidden
+
+  img
+    object-fit: cover
+
+.img-block
+  width: 50%
+  cursor: zoom-in
+
+.custom-popup
+  height: 100%

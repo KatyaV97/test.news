@@ -1,0 +1,32 @@
+@import "./fonts/Stolzl"
+
+/* Font variables that are used into sass components*/
+
+$base-font: $Stolzl
+$base-medium: $Stolzl-Medium
+
+@mixin default-h1
+  font-size: 32px
+  @include medium-text
+
+@mixin default-h3
+  font-size: 28px
+  @include medium-text
+
+@mixin title-text
+  font-size: 24px
+  @include regular-text
+
+@mixin default-text
+  font-size: 16px
+  @include regular-text
+
+/* Mixins for medium text-tags */
+
+@mixin medium-text
+  font-weight: 500
+  font-family: $Stolzl-Medium, sans-serif
+
+@mixin regular-text
+  font-weight: 400
+  font-family: $Stolzl, sans-serif

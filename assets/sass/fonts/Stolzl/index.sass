@@ -1,0 +1,20 @@
+/* Подключено 2 шрифта: основной и для знака рубля,*/
+/* если в коде есть span с классом .rouble, */
+/* то там и распологается символ рубля (в 2 начертаниях) */
+
+$Stolzl: 'Stolzl'
+$Stolzl-Medium: 'Stolzl-Medium'
+
+@font-face
+  font-family: $Stolzl
+  font-weight: normal
+  font-style: normal
+  font-display: swap
+  src : url("@/assets/sass/fonts/Stolzl/Stolzl-Regular.ttf")
+
+@font-face
+  font-family: $Stolzl-Medium
+  font-weight: bold
+  font-style: normal
+  font-display: swap
+  src : url("@/assets/sass/fonts/Stolzl/Stolzl-Medium.ttf")
